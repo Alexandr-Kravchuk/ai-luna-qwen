@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Луна · AI-лабрадор</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐶</text></svg>" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="paw">🐾</span> Луна
+      <span class="sub">· AI-лабрадор · голосом, у реальному часі</span>
+    </div>
+    <div id="meta" class="meta">…</div>
+  </header>
+
+  <main>
+    <section id="stage">
+      <!-- SVG-лабрадор: стани керуються класом state-* на <svg> -->
+      <svg id="dog" class="dog state-idle" viewBox="0 0 420 420" role="img" aria-label="Луна, лабрадор">
+        <!-- тінь -->
+        <ellipse cx="210" cy="388" rx="125" ry="14" fill="rgba(90,60,20,0.10)" />
+
+        <!-- хвіст -->
+        <g id="tail" class="tail">
+          <path d="M 298 322 Q 352 312 368 258 Q 374 236 360 232 Q 344 244 334 272 Q 322 304 296 308 Z" fill="#D9942B" />
+        </g>
+
+        <!-- тіло -->
+        <g id="bodyGroup" class="body">
+          <ellipse cx="215" cy="330" rx="100" ry="58" fill="#E8A33D" />
+          <ellipse cx="205" cy="280" rx="70" ry="75" fill="#E8A33D" />
+          <rect x="168" y="278" width="24" height="80" rx="12" fill="#E8A33D" />
+          <rect x="218" y="278" width="24" height="80" rx="12" fill="#E8A33D" />
+          <ellipse cx="205" cy="300" rx="38" ry="50" fill="#F7DCA8" />
+          <ellipse cx="180" cy="356" rx="19" ry="11" fill="#F2C078" />
+          <ellipse cx="230" cy="356" rx="19" ry="11" fill="#F2C078" />
+          <!-- повітря -->
+          <path d="M 148 230 Q 205 250 262 230 L 262 246 Q 205 266 148 246 Z" fill="#D64545" />
+          <circle cx="205" cy="255" r="9" fill="#F7C948" />
+        </g>
+
+        <!-- голова -->
+        <g id="head" class="head">
+          <!-- вуши -->
+          <path id="earL" class="ear earL" d="M 150 70 Q 98 86 94 148 Q 92 188 116 192 Q 136 195 144 166 Q 152 126 162 90 Z" fill="#B9762A" />
+          <path id="earR" class="ear earR" d="M 260 70 Q 312 86 316 148 Q 318 188 294 192 Q 274 195 266 166 Q 258 126 248 90 Z" fill="#B9762A" />
+          <!-- череп -->
+          <ellipse cx="205" cy="140" rx="88" ry="80" fill="#E8A33D" />
+          <!-- брови -->
+          <path d="M 156 112 Q 172 104 188 112" stroke="#B9762A" stroke-width="4" fill="none" stroke-linecap="round" />
+          <path d="M 222 112 Q 238 104 254 112" stroke="#B9762A" stroke-width="4" fill="none" stroke-linecap="round" />
+          <!-- очі -->
+          <g class="eye eyeL">
+            <g class="eyeball">
+              <circle cx="172" cy="132" r="13" fill="#2E1B0E" />
+              <circle cx="177" cy="127" r="4.5" fill="#fff" />
+            </g>
+          </g>
+          <g class="eye eyeR">
+            <g class="eyeball">
+              <circle cx="238" cy="132" r="13" fill="#2E1B0E" />
+              <circle cx="243" cy="127" r="4.5" fill="#fff" />
+            </g>
+          </g>
+          <!-- морда -->
+          <ellipse cx="205" cy="185" rx="52" ry="38" fill="#F7DCA8" />
+          <!-- ніс -->
+          <path d="M 189 167 Q 205 159 221 167 Q 224 178 205 187 Q 186 178 189 167 Z" fill="#3A2415" />
+          <path d="M 205 187 L 205 196" stroke="#3A2415" stroke-width="3" stroke-linecap="round" />
+          <!-- рот: посмішка -->
+          <path id="mouthSmile" d="M 182 198 Q 205 214 228 198" stroke="#3A2415" stroke-width="4.5" fill="none" stroke-linecap="round" />
+          <!-- рот: відкритий (говорить) -->
+          <g id="mouthOpen">
+            <ellipse cx="205" cy="208" rx="15" ry="12" fill="#5B3A21" />
+            <ellipse cx="205" cy="214" rx="9" ry="6.5" fill="#F27E9D" />
+          </g>
+          <!-- щоки -->
+          <circle class="blush" cx="150" cy="168" r="11" fill="#F2A2A2" />
+          <circle class="blush" cx="260" cy="168" r="11" fill="#F2A2A2" />
+        </g>
+
+        <!-- думки -->
+        <g id="thinkDots" class="thinkdots">
+          <circle cx="252" cy="44" r="5" fill="#C99B5F" />
+          <circle cx="272" cy="32" r="7" fill="#C99B5F" />
+          <circle cx="296" cy="20" r="9" fill="#C99B5F" />
+        </g>
+
+        <!-- хвилі звуку (слухає) -->
+        <g class="waves" stroke="#E8A33D" stroke-width="5" fill="none" stroke-linecap="round">
+          <path class="wave w1" d="M 98 122 Q 80 140 98 158" />
+          <path class="wave w2" d="M 84 112 Q 58 140 84 168" />
+          <path class="wave w3" d="M 70 102 Q 36 140 70 178" />
+        </g>
+      </svg>
+
+      <div id="status" class="status">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">Чекаю на тебе</span>
+      </div>
+      <button id="soundBtn" class="sound-btn hidden" type="button">🔊 Увімкнути звук</button>
+    </section>
+
+    <section id="chat" aria-live="polite"></section>
+
+    <form id="composer">
+      <input id="textInput" placeholder="Або напиши Луні…" autocomplete="off" />
+      <button type="submit" class="send" title="Надіслати">➤</button>
+      <button id="mic" type="button" title="Говори (пробіл)">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="2" width="6" height="12" rx="3" />
+          <path d="M5 10a7 7 0 0 0 14 0" />
+          <line x1="12" y1="19" x2="12" y2="22" />
+        </svg>
+        <span class="ring"></span>
+      </button>
+      <button id="muteBtn" class="hidden" type="button" title="Вимкнути/увімкнути мікрофон">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="2" y1="2" x2="22" y2="22" />
+          <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" />
+          <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23" />
+          <line x1="12" y1="19" x2="12" y2="22" />
+        </svg>
+      </button>
+    </form>
+
+    <!-- Віддалений аудіо з голосового рушія; аналізатор гучності лише «слухає» його -->
+    <audio id="remoteAudio" autoplay playsinline hidden></audio>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
